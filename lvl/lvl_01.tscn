@@ -11,5 +11,12 @@ script = ExtResource("1_einmg")
 
 [node name="children" type="Node" parent="."]
 
-[node name="Player" parent="." instance=ExtResource("2_4os8n")]
+[node name="Player" parent="." node_paths=PackedStringArray("timer") instance=ExtResource("2_4os8n")]
 position = Vector2(139, 139)
+timer = NodePath("../GlobalTimer")
+
+[node name="GlobalTimer" type="Timer" parent="."]
+wait_time = 70.0
+autostart = true
+
+[connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]
