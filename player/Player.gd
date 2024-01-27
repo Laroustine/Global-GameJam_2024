@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 @export var speed:int = 400
 @export var map_size:Vector2 = Vector2(2048,2048)
@@ -13,7 +13,7 @@ func _process(delta):
 
 func _physics_process(delta):
 	# returns the direction with analog support
-	var velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	velocity = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
@@ -22,5 +22,4 @@ func _physics_process(delta):
 		$AnimatedSprite2D.stop()
 
 	
-	position += velocity * delta
-	#position = position.clamp(Vector2.ZERO, map_size)
+	move_and_slide()
