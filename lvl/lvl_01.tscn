@@ -19,4 +19,5 @@ timer = NodePath("../GlobalTimer")
 wait_time = 70.0
 autostart = true
 
+[connection signal="collided_child" from="Player" to="." method="_on_player_collided_child"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

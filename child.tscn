@@ -3,8 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://dtmqop2w18wf8" path="res://icon.svg" id="1_wtwxf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mq5tv"]
+size = Vector2(127, 127)
 
-[node name="Child" type="Node2D"]
+[node name="Child" type="Area2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mq5tv")

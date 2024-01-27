@@ -5,6 +5,8 @@ extends CharacterBody2D
 @onready var time_lable = $Control/Time
 @export var timer:Timer 
 
+signal collided_child(child)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -30,3 +32,8 @@ func _physics_process(delta):
 
 	
 	move_and_slide()
+
+
+func _on_area_2d_area_entered(area):
+	collided_child.emit(area)
+	
