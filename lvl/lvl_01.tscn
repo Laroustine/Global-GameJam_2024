@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpy3i1p182078"]
+
+[ext_resource type="PackedScene" uid="uid://bnp3dvg6i703t" path="res://map/map_1.tscn" id="1_jeu65"]
+[ext_resource type="PackedScene" uid="uid://da7k18xw8t36" path="res://player/Player.tscn" id="2_4os8n"]
+
+[node name="Lvl01" type="Node2D"]
+
+[node name="Map1" parent="." instance=ExtResource("1_jeu65")]
+
+[node name="Player" parent="." instance=ExtResource("2_4os8n")]
+position = Vector2(470, 360)
