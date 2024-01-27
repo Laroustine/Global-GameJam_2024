@@ -1,3 +1,46 @@
-[gd_scene format=3 uid="uid://dcu7bu0736xss"]
+[gd_scene load_steps=7 format=3 uid="uid://dcu7bu0736xss"]
+
+[ext_resource type="Script" path="res://mini-games/tarte-face.gd" id="1_3g60e"]
+[ext_resource type="Texture2D" uid="uid://dtmqop2w18wf8" path="res://icon.svg" id="2_20ffa"]
+[ext_resource type="Script" path="res://mini-games/Reticle.gd" id="2_if8lp"]
+[ext_resource type="Texture2D" uid="uid://lbxr5aapvemm" path="res://texture/tarte-face/reticule.png" id="3_j5c13"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m4qkv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tcrbs"]
+size = Vector2(127, 127)
 
 [node name="Tarte-face" type="Node2D"]
+script = ExtResource("1_3g60e")
+
+[node name="Reticle" type="Area2D" parent="."]
+position = Vector2(38, 3.8147e-06)
+scale = Vector2(0.1, 0.1)
+script = ExtResource("2_if8lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Reticle"]
+position = Vector2(-2, -8)
+shape = SubResource("CircleShape2D_m4qkv")
+
+[node name="Reticle" type="Sprite2D" parent="Reticle"]
+scale = Vector2(1, 1)
+texture = ExtResource("3_j5c13")
+
+[node name="Face" type="Area2D" parent="."]
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Face"]
+shape = SubResource("RectangleShape2D_tcrbs")
+
+[node name="Face" type="Sprite2D" parent="Face"]
+position = Vector2(1.90735e-05, 1.13687e-12)
+scale = Vector2(1, 1)
+texture = ExtResource("2_20ffa")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="area_entered" from="Reticle" to="Reticle" method="_on_area_entered"]
+[connection signal="hit" from="Reticle" to="." method="_on_reticle_hit"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
