@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://tpaagxx7mqso"]
+
+[ext_resource type="Script" path="res://mini-games/meme_assets/Grandma.gd" id="1_wa47e"]
+
+[node name="Grandma" type="Area2D"]
+script = ExtResource("1_wa47e")

@@ -1,3 +1,33 @@
-[gd_scene format=3 uid="uid://dfygn03bofw5s"]
+[gd_scene load_steps=6 format=3 uid="uid://dfygn03bofw5s"]
+
+[ext_resource type="Script" path="res://mini-games/meme_ortie.gd" id="1_ifjjj"]
+[ext_resource type="Texture2D" uid="uid://dibxk0d64mjws" path="res://texture/buisson.png" id="2_8dmft"]
+[ext_resource type="Script" path="res://mini-games/meme_assets/Hand.gd" id="3_vl8r6"]
+[ext_resource type="Texture2D" uid="uid://b36v5r54vsw8e" path="res://texture/hand_push.png" id="4_7ib6p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxuec"]
+size = Vector2(50, 80)
 
 [node name="meme-ortie" type="Node2D"]
+script = ExtResource("1_ifjjj")
+
+[node name="Plants" type="Sprite2D" parent="."]
+position = Vector2(977, 320)
+texture = ExtResource("2_8dmft")
+
+[node name="Characters" type="Node" parent="."]
+
+[node name="Hand" type="Area2D" parent="."]
+position = Vector2(421, 606)
+script = ExtResource("3_vl8r6")
+MOVE = 180.0
+
+[node name="Sprite" type="Sprite2D" parent="Hand"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_7ib6p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hand"]
+position = Vector2(33, 0)
+shape = SubResource("RectangleShape2D_yxuec")
+
+[connection signal="area_entered" from="Hand" to="Hand" method="_on_area_entered"]
