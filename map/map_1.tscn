@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bnp3dvg6i703t"]
+[gd_scene load_steps=8 format=3 uid="uid://bnp3dvg6i703t"]
 
 [ext_resource type="Texture2D" uid="uid://vnhwq0m44n5e" path="res://texture/map/map_01.png" id="1_kxpqk"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qp2eg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vt4ro"]
 size = Vector2(2048, 80)
@@ -22,34 +24,31 @@ size = Vector2(180, 900)
 [node name="MAP" type="Sprite2D" parent="."]
 texture = ExtResource("1_kxpqk")
 
-[node name="Borders" type="Area2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_qp2eg")
 
-[node name="Top" type="CollisionShape2D" parent="Borders"]
+[node name="Top" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -985)
 shape = SubResource("RectangleShape2D_vt4ro")
 
-[node name="Bot" type="CollisionShape2D" parent="Borders"]
+[node name="Bot" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 985)
 shape = SubResource("RectangleShape2D_0rgas")
 
-[node name="Right" type="CollisionShape2D" parent="Borders"]
+[node name="Right" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(985, 0)
 shape = SubResource("RectangleShape2D_y04jd")
 
-[node name="Left" type="CollisionShape2D" parent="Borders"]
+[node name="Left" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-985, 0)
 shape = SubResource("RectangleShape2D_oiqhc")
 
-[node name="Walls" type="Area2D" parent="."]
-
-[node name="North" type="CollisionShape2D" parent="Walls"]
+[node name="North" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(376, -396)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_fkyg8")
 
-[node name="South" type="CollisionShape2D" parent="Walls"]
+[node name="South" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-466, 402)
 rotation = 0.785398
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_fkyg8")
