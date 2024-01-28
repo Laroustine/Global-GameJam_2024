@@ -1,13 +1,17 @@
 extends Node2D
 
 var pos_l = []
-@export var n_pos:int = 10
+@export var n_pos: int = 10
+@export var map_size: Vector2 = Vector2(1100, 600)
+@export var IS_PLAYING = false
+
 var indx:int = 0
+
+signal give_score(score: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
-	var map_size = get_viewport().content_scale_size
 
 	var face = $Face
 	var ret  = $Reticle
@@ -25,14 +29,15 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
-func _on_reticle_hit():
-	if Input.is_action_pressed("ui_accept"):
-		get_tree().quit()
-
+	$Reticle.IS_PLAYING = IS_PLAYING
 
 func _on_timer_timeout():
 	if randi_range(0,1) < 1:
 		indx = randi_range(0,n_pos-1)
 	$Face.position = pos_l[indx]
+
+func _on_reticle_hit(did_hit):
+	if did_hit:
+		give_score.emit(100)
+	else:
+		give_score.emit(-50)

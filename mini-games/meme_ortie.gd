@@ -21,6 +21,6 @@ func _process(delta):
 
 func _on_hand_did_win(win):
 	if win:
-		give_score.emit(200)
+		give_score.emit(100)
 	else:
 		give_score.emit(-50)

@@ -8,7 +8,7 @@ extends CharacterBody2D
 var SCORE = 0
 
 var IS_PLAYING = false
-var MINI_GAMES = [preload("res://mini-games/meme_ortie.tscn")]
+var MINI_GAMES = [preload("res://mini-games/meme_ortie.tscn"), preload("res://mini-games/tarte-face.tscn")]
 var CURRENT_GAME = null
 
 signal collided_child(child)

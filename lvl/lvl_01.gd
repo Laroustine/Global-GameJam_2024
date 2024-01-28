@@ -1,6 +1,6 @@
 extends Node2D
 
-var npc = load("res://child.tscn")
+var npc = load("res://lvl/child.tscn")
 @onready var time_lable = $Control/Time
 
 # Called when the node enters the scene tree for the first time.
