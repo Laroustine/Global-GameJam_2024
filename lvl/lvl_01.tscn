@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dpy3i1p182078"]
+[gd_scene load_steps=5 format=3 uid="uid://dpy3i1p182078"]
 
 [ext_resource type="Script" path="res://lvl/lvl_01.gd" id="1_einmg"]
 [ext_resource type="PackedScene" uid="uid://bnp3dvg6i703t" path="res://map/map_1.tscn" id="1_jeu65"]
 [ext_resource type="PackedScene" uid="uid://da7k18xw8t36" path="res://player/Player.tscn" id="2_4os8n"]
+[ext_resource type="AudioStream" uid="uid://dk52ym8c3tfgu" path="res://music/q7t-8Q22Ic0_UNIST_Girl.ogg" id="4_2vx7i"]
 
 [node name="Lvl01" type="Node2D"]
 script = ExtResource("1_einmg")
@@ -16,8 +17,14 @@ position = Vector2(139, 139)
 timer = NodePath("../GlobalTimer")
 
 [node name="GlobalTimer" type="Timer" parent="."]
-wait_time = 70.0
+wait_time = 120.0
 autostart = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2vx7i")
+volume_db = -20.0
+pitch_scale = 0.9
+autoplay = true
 
 [connection signal="collided_child" from="Player" to="." method="_on_player_collided_child"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]

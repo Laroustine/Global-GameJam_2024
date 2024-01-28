@@ -1,5 +1,6 @@
 extends Area2D
 
+@export var IS_PLAYING = false
 @export var SPEED = 400.0
 @export var START = Vector2(420, 20)
 @export var END = Vector2(420, 600)
@@ -7,12 +8,14 @@ extends Area2D
 var TARGET
 var IS_CLICKED = false
 
+signal did_win(win: bool)
+
 func _ready():
 	position = START
 	TARGET = END
 
 func _process(delta):
-	if Input.is_action_pressed("ui_accept") and not IS_CLICKED:
+	if IS_PLAYING and Input.is_action_pressed("ui_accept") and not IS_CLICKED:
 		IS_CLICKED = true
 		TARGET = Vector2(global_position.x + MOVE, global_position.y)
 
@@ -26,8 +29,4 @@ func _physics_process(delta):
 
 func _on_area_entered(area):
 	var grandma := area as Grandma
-	if grandma.IS_GRANDMA:
-		print("GOOD")
-	else:
-		print("BAD")
-	
+	did_win.emit(grandma.IS_GRANDMA)

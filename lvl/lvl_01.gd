@@ -35,10 +35,5 @@ func _process(delta):
 func _on_global_timer_timeout():
 	get_tree().change_scene_to_file("res://menu/menu.tscn")
 
-
 func _on_player_collided_child(child):
 	child.queue_free()
-	print("Making Child laugh")
-	await get_tree().create_timer(3.0).timeout
-	get_tree().change_scene_to_file("res://lvl/lvl_01.tscn")
-	
