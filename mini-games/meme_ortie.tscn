@@ -1,13 +1,74 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfygn03bofw5s"]
+[gd_scene load_steps=10 format=3 uid="uid://dfygn03bofw5s"]
 
 [ext_resource type="Script" path="res://mini-games/meme_ortie.gd" id="1_ifjjj"]
 [ext_resource type="Texture2D" uid="uid://dibxk0d64mjws" path="res://texture/buisson.png" id="2_8dmft"]
 [ext_resource type="Script" path="res://mini-games/meme_assets/Hand.gd" id="3_vl8r6"]
 [ext_resource type="Texture2D" uid="uid://b36v5r54vsw8e" path="res://texture/hand_push.png" id="4_7ib6p"]
-[ext_resource type="Texture2D" uid="uid://bli6uosn87884" path="res://texture/txt_meme.png" id="5_f5fa3"]
+[ext_resource type="Texture2D" uid="uid://f0s4jtog7gu4" path="res://texture/pousse-meme-dans-les-orties-28-01-2024.png" id="5_i66a0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxuec"]
 size = Vector2(50, 80)
+
+[sub_resource type="Animation" id="Animation_84rfn"]
+resource_name = "shake"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Plants:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0349066, 0.0349066, -0.0349066]
+}
+
+[sub_resource type="Animation" id="Animation_avo68"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Text:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Plants:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0349066]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rht77"]
+_data = {
+"RESET": SubResource("Animation_avo68"),
+"shake": SubResource("Animation_84rfn")
+}
 
 [node name="meme-ortie" type="Node2D"]
 script = ExtResource("1_ifjjj")
@@ -20,6 +81,7 @@ color = Color(0.509804, 0.317647, 0.164706, 0.352941)
 
 [node name="Plants" type="Sprite2D" parent="."]
 position = Vector2(977, 320)
+skew = -0.0349066
 texture = ExtResource("2_8dmft")
 
 [node name="Characters" type="Node" parent="."]
@@ -41,8 +103,15 @@ shape = SubResource("RectangleShape2D_yxuec")
 position = Vector2(576, 324)
 
 [node name="Text" type="Sprite2D" parent="."]
-position = Vector2(199, 86)
-texture = ExtResource("5_f5fa3")
+position = Vector2(249, 122)
+rotation = -0.0872665
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_i66a0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rht77")
+}
 
 [connection signal="area_entered" from="Hand" to="Hand" method="_on_area_entered"]
 [connection signal="did_win" from="Hand" to="." method="_on_hand_did_win"]

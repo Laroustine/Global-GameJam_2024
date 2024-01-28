@@ -7,6 +7,7 @@ signal give_score(score: int)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationPlayer.play("shake")
 	randomize()
 	var height = 648 / (NUM_GRANDMA + 1)
 	var rnd_gr = randi_range(0, NUM_GRANDMA - 1)

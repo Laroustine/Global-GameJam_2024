@@ -25,8 +25,8 @@ func _ready():
 
 	var pos = Vector2.ZERO
 	for i in range(n_pos-1):
-		pos.x = randi_range(0,map_size.x)
-		pos.y = randi_range(0,map_size.y)
+		pos.x = randf_range(0,map_size.x)
+		pos.y = randf_range(0,map_size.y)
 		pos_l.append(pos)
 	pos_l.append(ret.position)
 	face.global_position = Vector2(500, 310)

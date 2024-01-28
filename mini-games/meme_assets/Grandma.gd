@@ -2,8 +2,8 @@ class_name Grandma extends Area2D
 
 @export var IS_GRANDMA: bool = false
 @export var anim: AnimationPlayer
-var text_gran = preload("res://icon2.svg")
-var text_child = preload("res://icon.svg")
+var text_gran = preload("res://texture/old_lady.png")
+var text_child = preload("res://texture/sad_kid.png")
 
 func _ready():
 	if IS_GRANDMA:

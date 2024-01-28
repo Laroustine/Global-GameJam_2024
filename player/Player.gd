@@ -39,9 +39,12 @@ func _physics_process(_delta):
 
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * speed
-		$AnimatedSprite2D.play()
+		if velocity.y >= 0:
+			$AnimationPlayer.play("move")
+		else:
+			$AnimationPlayer.play("move_top")
 	else:
-		$AnimatedSprite2D.stop()
+		$AnimationPlayer.play("idle")
 	move_and_slide()
 
 func set_playing(value: bool):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://b45y26yaodfcw"]
 
-[ext_resource type="Texture2D" uid="uid://bajnwb6qhigd6" path="res://texture/map/image.png" id="1_w1xkh"]
+[ext_resource type="Texture2D" uid="uid://ctcmwqan32iso" path="res://texture/background.png" id="1_fxhvr"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qp2eg"]
 
@@ -47,8 +47,7 @@ size = Vector2(581, 346.75)
 [node name="Map1" type="Node2D"]
 
 [node name="MAP" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = ExtResource("1_w1xkh")
+texture = ExtResource("1_fxhvr")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_qp2eg")
