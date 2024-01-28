@@ -26,5 +26,10 @@ volume_db = -20.0
 pitch_scale = 0.9
 autoplay = true
 
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
 [connection signal="collided_child" from="Player" to="." method="_on_player_collided_child"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

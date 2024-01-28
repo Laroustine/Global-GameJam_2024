@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bx6tihtnhlnq"]
+[gd_scene load_steps=4 format=3 uid="uid://dp5i41t2haanu"]
 
 [ext_resource type="Texture2D" uid="uid://mrlq7xt6vxhx" path="res://texture/sad.png" id="1_c4oqa"]
+[ext_resource type="Script" path="res://lvl/child.gd" id="1_d66va"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mq5tv"]
 size = Vector2(127, 127)
 
 [node name="Child" type="Area2D"]
+script = ExtResource("1_d66va")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.49, 0.49)
 texture = ExtResource("1_c4oqa")
 

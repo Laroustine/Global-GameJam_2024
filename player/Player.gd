@@ -56,5 +56,6 @@ func _on_area_2d_area_entered(area):
 func _on_give_score(value):
 	SCORE += value
 	set_playing(false)
-	CURRENT_GAME.queue_free()
+	if CURRENT_GAME:
+		CURRENT_GAME.queue_free()
 	CURRENT_GAME = null
