@@ -10,13 +10,15 @@ func _ready():
 	randomize()
 	var height = 648 / (NUM_GRANDMA + 1)
 	var rnd_gr = randi_range(0, NUM_GRANDMA - 1)
+	var grand_snc = load("res://mini-games/meme_assets/Grandma.tscn")
 	for i in range(NUM_GRANDMA):
-		var grand = Grandma.new(i == rnd_gr)
+		var grand = grand_snc.instantiate()
+		grand.IS_GRANDMA = i == rnd_gr
 		grand.position = Vector2(700, height + height * i)
 		$Characters.add_child(grand)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	$Hand.IS_PLAYING = IS_PLAYING
 
 func _on_hand_did_win(win):

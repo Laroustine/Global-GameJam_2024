@@ -1,7 +1,6 @@
 extends Node2D
 
 var npc = load("res://lvl/child.tscn")
-@onready var time_lable = $Control/Time
 @export var children_pos = [Vector2(0,0), Vector2(-800,800), Vector2(-800,-800),Vector2(800,800), Vector2(800,-800)]
 
 # Called when the node enters the scene tree for the first time.
@@ -16,7 +15,7 @@ func _ready():
 		$children.add_child(npc_i)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	#time_lable.set_text(time_to_str(($GlobalTimer.time_left)))
 	pass
 

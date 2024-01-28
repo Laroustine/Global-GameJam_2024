@@ -1,14 +1,130 @@
-[gd_scene load_steps=7 format=3 uid="uid://dcu7bu0736xss"]
+[gd_scene load_steps=12 format=3 uid="uid://dcu7bu0736xss"]
 
 [ext_resource type="Script" path="res://mini-games/tarte-face.gd" id="1_3g60e"]
 [ext_resource type="Texture2D" uid="uid://dtmqop2w18wf8" path="res://icon.svg" id="2_20ffa"]
 [ext_resource type="Script" path="res://mini-games/tarte_assets/Reticle.gd" id="2_if8lp"]
 [ext_resource type="Texture2D" uid="uid://lbxr5aapvemm" path="res://texture/tarte-face/reticule.png" id="3_j5c13"]
+[ext_resource type="Texture2D" uid="uid://cepu5lcwx7lme" path="res://texture/pie.png" id="5_opa6w"]
+
+[sub_resource type="Animation" id="Animation_q1aq8"]
+resource_name = "shake"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533, -0.174533]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.174533, 0.174533, -0.174533]
+}
+
+[sub_resource type="Animation" id="Animation_6ujwo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(930, 480)]
+}
+
+[sub_resource type="Animation" id="Animation_1q0nv"]
+resource_name = "throw"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(930, 480), Vector2(570, 313)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Reticle:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.174533, -1.89892, -2.76111]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v7mx3"]
+_data = {
+"RESET": SubResource("Animation_6ujwo"),
+"shake": SubResource("Animation_q1aq8"),
+"throw": SubResource("Animation_1q0nv")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tcrbs"]
 size = Vector2(127, 127)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m4qkv"]
+radius = 14.0
 
 [node name="Tarte-face" type="Node2D"]
 script = ExtResource("1_3g60e")
@@ -19,8 +135,14 @@ offset_bottom = 40.0
 scale = Vector2(28.8573, 16.1964)
 color = Color(0.509804, 0.317647, 0.164706, 0.352941)
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Pie")
+libraries = {
+"": SubResource("AnimationLibrary_v7mx3")
+}
+
 [node name="Face" type="Area2D" parent="."]
-scale = Vector2(0.2, 0.2)
+scale = Vector2(1.4, 1.4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Face"]
 shape = SubResource("RectangleShape2D_tcrbs")
@@ -31,15 +153,21 @@ texture = ExtResource("2_20ffa")
 
 [node name="Reticle" type="Area2D" parent="."]
 position = Vector2(38, 3.8147e-06)
-scale = Vector2(0.1, 0.1)
+scale = Vector2(1.2, 1.2)
 script = ExtResource("2_if8lp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Reticle"]
 position = Vector2(-2, -8)
 shape = SubResource("CircleShape2D_m4qkv")
+debug_color = Color(0.972549, 0.0745098, 0.364706, 0.419608)
 
 [node name="Reticle" type="Sprite2D" parent="Reticle"]
 texture = ExtResource("3_j5c13")
+
+[node name="Pie" type="Sprite2D" parent="."]
+position = Vector2(930, 480)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("5_opa6w")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.2

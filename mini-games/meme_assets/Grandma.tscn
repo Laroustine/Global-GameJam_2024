@@ -1,6 +1,83 @@
-[gd_scene load_steps=2 format=3 uid="uid://tpaagxx7mqso"]
+[gd_scene load_steps=7 format=3 uid="uid://tpaagxx7mqso"]
 
 [ext_resource type="Script" path="res://mini-games/meme_assets/Grandma.gd" id="1_wa47e"]
+[ext_resource type="Texture2D" uid="uid://dtmqop2w18wf8" path="res://icon.svg" id="2_23jdf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25pid"]
+size = Vector2(40, 120)
+
+[sub_resource type="Animation" id="Animation_orkvj"]
+resource_name = "jump"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(93, -59), Vector2(172, -79), Vector2(250, -63), Vector2(315, 16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.7, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.145444, 0.174533, 1.74533]
+}
+
+[sub_resource type="Animation" id="Animation_52mp0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0431g"]
+_data = {
+"RESET": SubResource("Animation_52mp0"),
+"jump": SubResource("Animation_orkvj")
+}
 
 [node name="Grandma" type="Area2D"]
 script = ExtResource("1_wa47e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_23jdf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-50, 0)
+shape = SubResource("RectangleShape2D_25pid")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0431g")
+}

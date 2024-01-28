@@ -1,20 +1,13 @@
 class_name Grandma extends Area2D
 
 @export var IS_GRANDMA: bool = false
-var text = null
+@export var anim: AnimationPlayer
+var text_gran = preload("res://icon2.svg")
+var text_child = preload("res://icon.svg")
 
-func _init(grandma: bool):
-	var sprite = Sprite2D.new()
-	IS_GRANDMA = grandma
+func _ready():
 	if IS_GRANDMA:
-		text = load("res://icon2.svg")
+		$Sprite2D.texture = text_gran
 	else:
-		text = load("res://icon.svg")
-	sprite.texture = text
-	add_child(sprite)
-	var collision = CollisionShape2D.new()
-	var rect = RectangleShape2D.new()
-	rect.size = Vector2(30, 140)
-	collision.shape = rect
-	collision.position = Vector2(-50, 0)
-	add_child(collision)
+		$Sprite2D.texture = text_child
+

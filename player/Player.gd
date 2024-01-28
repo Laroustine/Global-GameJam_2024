@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var map_size:Vector2 = Vector2(2048,2048)
 @onready var time_lable = $Control/Time
 @onready var score_lable = $Control/Score
+@onready var minigame_window = $Control/SubViewportContainer/SubViewport
 @export var timer:Timer 
 var SCORE = 0
 
@@ -23,9 +24,9 @@ func _process(_delta):
 	score_lable.set_text("Score: " + str(SCORE))
 
 func time_to_str(time: int):
-	var min = time/60
-	var sec = time - min*60
-	return str("%0*d"%[2,min])+":"+str("%0*d" % [2,sec])
+	var minute = time / 60
+	var sec = time - minute * 60
+	return str("%0*d"%[2,minute])+":"+str("%0*d" % [2,sec])
 	
 func _physics_process(_delta):
 	if IS_PLAYING:
@@ -49,7 +50,7 @@ func set_playing(value: bool):
 func _on_area_2d_area_entered(area):
 	CURRENT_GAME = MINI_GAMES[randi_range(0, len(MINI_GAMES) - 1)].instantiate()
 	CURRENT_GAME.give_score.connect(_on_give_score)
-	$Control/SubViewportContainer/SubViewport.add_child(CURRENT_GAME)
+	minigame_window.call_deferred("add_child", CURRENT_GAME)
 	set_playing(true)
 	collided_child.emit(area)
 

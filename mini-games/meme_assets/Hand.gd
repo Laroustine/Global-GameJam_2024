@@ -8,6 +8,8 @@ extends Area2D
 var TARGET
 var SPEED = 400.0
 var IS_CLICKED = false
+var animation: AnimationPlayer = null
+var is_hit: bool
 
 signal did_win(win: bool)
 
@@ -17,10 +19,12 @@ func _ready():
 	position = Vector2(randf_range(START.x, END.x), randf_range(START.y, END.y))
 	TARGET = END if randf() >= 0.5 else START
 
-func _process(delta):
+func _process(_delta):
 	if IS_PLAYING and Input.is_action_pressed("ui_accept") and not IS_CLICKED:
 		IS_CLICKED = true
 		TARGET = Vector2(global_position.x + MOVE, global_position.y)
+	if animation and not animation.is_playing():
+		did_win.emit(is_hit)
 
 func _physics_process(delta):
 	if global_position == TARGET and not IS_CLICKED:
@@ -33,4 +37,6 @@ func _physics_process(delta):
 
 func _on_area_entered(area):
 	var grandma := area as Grandma
-	did_win.emit(grandma.IS_GRANDMA)
+	animation = grandma.get_node("AnimationPlayer")
+	is_hit = grandma.IS_GRANDMA
+	animation.play("jump")
