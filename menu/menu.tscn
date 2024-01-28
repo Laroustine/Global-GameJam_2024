@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmlvbju0fwikc"]
+[gd_scene load_steps=4 format=3 uid="uid://cmlvbju0fwikc"]
 
 [ext_resource type="Script" path="res://menu/menu.gd" id="1_wr3yx"]
 [ext_resource type="Texture2D" uid="uid://bqjxtffb0e2av" path="res://texture/title_name.png" id="2_532xw"]
+[ext_resource type="Texture2D" uid="uid://bkeqlw8g0wbrc" path="res://texture/clown_01.png" id="2_xlapj"]
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -39,6 +40,11 @@ text = "PLAY"
 layout_mode = 2
 text = "QUIT"
 
+[node name="Clown01" type="Sprite2D" parent="."]
+position = Vector2(854, 244)
+scale = Vector2(3.07031, 3.07031)
+texture = ExtResource("2_xlapj")
+
 [node name="Logo" type="Sprite2D" parent="."]
 position = Vector2(576, 184)
 scale = Vector2(0.485, 0.485)
@@ -48,12 +54,12 @@ texture = ExtResource("2_532xw")
 layout_mode = 0
 offset_left = 15.0
 offset_top = 12.0
-offset_right = 188.0
+offset_right = 218.0
 offset_bottom = 165.0
 text = "Made by:
 - Laroustine
 Additional Support by:
-- Procop
+- Procop & Sa Trompette
 - My Dad
 - My Mom
 "
