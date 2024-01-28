@@ -1,7 +1,7 @@
 extends Node2D
 
 var npc = load("res://lvl/child.tscn")
-@export var children_pos = [Vector2(0,0), Vector2(-800,800), Vector2(-800,-800),Vector2(800,800), Vector2(800,-800)]
+@export var children_pos = [Vector2(0,-150), Vector2(-800,800), Vector2(-650,-650),Vector2(400,750), Vector2(550,-800)]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
