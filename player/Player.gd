@@ -16,6 +16,7 @@ var MINI_GAMES = [
 var CURRENT_GAME = null
 
 signal collided_child(child)
+signal new_score(score)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -66,3 +67,4 @@ func _on_give_score(value):
 	if CURRENT_GAME:
 		CURRENT_GAME.queue_free()
 	CURRENT_GAME = null
+	new_score.emit(SCORE)

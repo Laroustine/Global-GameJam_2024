@@ -18,11 +18,14 @@ timer = NodePath("../GlobalTimer")
 
 [node name="GlobalTimer" type="Timer" parent="."]
 wait_time = 40.0
+one_shot = true
 autostart = true
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 7.5
 autostart = true
+
+[node name="WIN" type="AudioStreamPlayer" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_7sbtx")
@@ -31,5 +34,7 @@ pitch_scale = 1.1
 autoplay = true
 
 [connection signal="collided_child" from="Player" to="." method="_on_player_collided_child"]
+[connection signal="new_score" from="Player" to="." method="_on_player_new_score"]
 [connection signal="timeout" from="GlobalTimer" to="." method="_on_global_timer_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="finished" from="WIN" to="." method="_on_win_finished"]

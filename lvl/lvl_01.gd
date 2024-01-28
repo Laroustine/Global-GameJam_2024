@@ -3,6 +3,8 @@ extends Node2D
 var npc = load("res://lvl/child.tscn")
 @export var children_pos = [Vector2(0,-150), Vector2(-800,800), Vector2(-650,-650),Vector2(400,750), Vector2(550,-800)]
 
+var SCORE = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var id = 0
@@ -20,11 +22,17 @@ func _process(_delta):
 	pass
 
 func _on_global_timer_timeout():
-	get_tree().change_scene_to_file("res://menu/menu.tscn")
+	if SCORE < 0:
+		$WIN.stream = load("res://music/lose.ogg")
+	elif SCORE <= 100:
+		$WIN.stream = load("res://music/mid.ogg")
+	else:
+		$WIN.stream = load("res://music/win.ogg")
+	$WIN.play()
+	$Player.IS_PLAYING = true
 
 func _on_player_collided_child(child):
 	child.queue_free()
-
 
 func _on_spawn_timer_timeout():
 	if $Player.IS_PLAYING:
@@ -40,3 +48,11 @@ func _on_spawn_timer_timeout():
 		npc_i.global_position = children_pos[i]
 		npc_i.get_node("Sprite2D").visible=true
 		$children.add_child(npc_i)
+
+func _on_player_new_score(score):
+	SCORE = score
+
+
+func _on_win_finished():
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_file("res://menu/menu.tscn")
